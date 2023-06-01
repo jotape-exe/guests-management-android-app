@@ -1,4 +1,4 @@
-package com.company.convidades.ui
+package com.company.convidades.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.company.convidades.databinding.FragmentAllGuestsBinding
+import com.company.convidades.databinding.FragmentAbsentsBinding
+import com.company.convidades.viewmodel.AbsentsViewModel
 
-class AllGuestsFragment : Fragment() {
+class AbsentsFragment : Fragment() {
 
-    private var _binding: FragmentAllGuestsBinding? = null
+    private var _binding: FragmentAbsentsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +23,14 @@ class AllGuestsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val allGuestsViewModel =
-            ViewModelProvider(this).get(AllGuestsViewModel::class.java)
+        val absentsViewModel =
+            ViewModelProvider(this).get(AbsentsViewModel::class.java)
 
-        _binding = FragmentAllGuestsBinding.inflate(inflater, container, false)
+        _binding = FragmentAbsentsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        allGuestsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textSlideshow
+        absentsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

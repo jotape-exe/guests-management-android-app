@@ -1,4 +1,4 @@
-package com.company.convidades.ui
+package com.company.convidades.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

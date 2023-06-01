@@ -1,9 +1,12 @@
-package com.company.convidades
+package com.company.convidades.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.company.convidades.R
 import com.company.convidades.databinding.ActivityGuestFormBinding
+import com.company.convidades.model.GuestModel
+import com.company.convidades.viewmodel.GuestFormViewModel
 
 class GuestFormActivity : AppCompatActivity() {
 
@@ -21,7 +24,8 @@ class GuestFormActivity : AppCompatActivity() {
 
         binding.buttonSave.setOnClickListener {
             if (it.id == R.id.button_save){
-
+                viewModel.save()
+                GuestModel(10, "joao", false)
             }
         }
     }
