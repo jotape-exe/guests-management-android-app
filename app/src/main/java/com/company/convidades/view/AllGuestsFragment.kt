@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.company.convidades.databinding.FragmentAllGuestsBinding
 import com.company.convidades.view.adapter.GuestsAdapter
+import com.company.convidades.view.listener.IGuestListener
 import com.company.convidades.viewmodel.AllGuestsViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class AllGuestsFragment : Fragment() {
 
@@ -32,6 +32,21 @@ class AllGuestsFragment : Fragment() {
 
         binding.recyclerAllGuests.layoutManager = LinearLayoutManager(context)
         binding.recyclerAllGuests.adapter = adapter
+
+        val listerner = object: IGuestListener {
+            override fun onClick(id: Int) {
+                Snackbar.make(view!!, "Guest ID -> $id", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+            }
+
+            override fun onDelete(id: Int) {
+                allGuestsViewModel.delete(id)
+                allGuestsViewModel.finALl()
+            }
+
+        }
+
+        adapter.attachListener(listerner)
 
         allGuestsViewModel.finALl()
 
