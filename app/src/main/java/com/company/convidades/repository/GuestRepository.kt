@@ -1,5 +1,6 @@
 package com.company.convidades.repository
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -77,6 +78,7 @@ class GuestRepository private constructor(context: Context) {
             false
         }
     }
+
 
     fun findAll():List<GuestModel> {
 
