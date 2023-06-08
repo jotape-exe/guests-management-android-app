@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.company.convidades.R
+import com.company.convidades.constants.DataBaseConstants
 import com.company.convidades.databinding.ActivityGuestFormBinding
 import com.company.convidades.model.GuestModel
 import com.company.convidades.viewmodel.GuestFormViewModel
@@ -30,6 +31,17 @@ class GuestFormActivity : AppCompatActivity() {
                 val entity = GuestModel(0, name, present)
                 viewModel.save(entity)
             }
+        }
+
+        loadData()
+    }
+
+    private fun loadData() {
+        val bundle = intent.extras
+
+        if (bundle != null){
+            val guestId = bundle.getInt(DataBaseConstants.GUEST.ID)
+            viewModel.get(guestId)
         }
     }
 }
