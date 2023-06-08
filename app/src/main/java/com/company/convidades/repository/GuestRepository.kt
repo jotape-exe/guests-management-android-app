@@ -80,6 +80,7 @@ class GuestRepository private constructor(context: Context) {
     }
 
 
+
     fun findAll():List<GuestModel> {
 
         val guests = mutableListOf<GuestModel>()
@@ -144,8 +145,42 @@ class GuestRepository private constructor(context: Context) {
         return guests
     }
 
-    fun findById(id: Int) {
+    fun findById(id: Int): GuestModel? {
 
+        var guest: GuestModel? = null
+
+        try {
+
+            val db: SQLiteDatabase = guestDataBase.readableDatabase
+            val selection = "${DataBaseConstants.GUEST.COLUMNS.ID} = ?"
+            val args: Array<String> = arrayOf(id.toString())
+            val projection: Array<String> = arrayOf(
+                DataBaseConstants.GUEST.COLUMNS.ID,
+                DataBaseConstants.GUEST.COLUMNS.NAME,
+                DataBaseConstants.GUEST.COLUMNS.PRESENCE
+            )
+
+            val cursor = db.query(
+                DataBaseConstants.GUEST.TABLE_NAME,
+                projection, selection, args,
+                null, null, null
+            )
+
+            if (cursor != null && cursor.count > 0){
+                while (cursor.moveToNext()){
+                    val name = cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
+                    val presence = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE))
+
+                    guest = GuestModel(id, name, presence == 1)
+                }
+            }
+
+            cursor.close()
+        } catch (ex: Exception){
+            return guest
+        }
+
+        return guest
     }
 
 }
