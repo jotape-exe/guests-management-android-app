@@ -1,5 +1,6 @@
 package com.company.convidades.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.company.convidades.constants.DataBaseConstants
 import com.company.convidades.databinding.FragmentAllGuestsBinding
 import com.company.convidades.view.adapter.GuestsAdapter
 import com.company.convidades.view.listener.IGuestListener
@@ -35,8 +37,14 @@ class AllGuestsFragment : Fragment() {
 
         val listerner = object: IGuestListener {
             override fun onClick(id: Int) {
-                Snackbar.make(view!!, "Guest ID -> $id", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+
+                val intent = Intent(context, GuestFormActivity::class.java)
+                val bundle  = Bundle()
+                bundle.putInt(DataBaseConstants.GUEST.ID, id)
+
+                intent.putExtras(bundle)
+
+                startActivity(intent)
             }
 
             override fun onDelete(id: Int) {
