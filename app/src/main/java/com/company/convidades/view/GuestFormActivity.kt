@@ -14,6 +14,8 @@ class GuestFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGuestFormBinding
     private lateinit var viewModel: GuestFormViewModel
 
+    private var guestId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,19 +30,34 @@ class GuestFormActivity : AppCompatActivity() {
                 val name = binding.editName.text.toString()
                 val present = binding.radioPresent.isChecked
 
-                val entity = GuestModel(0, name, present)
+                val entity = GuestModel(guestId, name, present)
+
                 viewModel.save(entity)
+                finish()
             }
         }
 
+        observe()
+
         loadData()
+    }
+
+    private fun observe() {
+        viewModel.guest.observe(this) {
+            binding.editName.setText(it.name)
+            if (it.presence){
+                binding.radioPresent.isChecked
+            } else{
+                binding.radioAbsent.isChecked
+            }
+        }
     }
 
     private fun loadData() {
         val bundle = intent.extras
 
         if (bundle != null){
-            val guestId = bundle.getInt(DataBaseConstants.GUEST.ID)
+            guestId = bundle.getInt(DataBaseConstants.GUEST.ID)
             viewModel.get(guestId)
         }
     }
