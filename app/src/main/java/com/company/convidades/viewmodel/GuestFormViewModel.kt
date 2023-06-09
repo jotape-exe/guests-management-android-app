@@ -12,15 +12,27 @@ class GuestFormViewModel(application: Application) : AndroidViewModel(applicatio
     private var repository = GuestRepository.getInstance(application)
     private val guestModel = MutableLiveData<GuestModel>()
     val guest: LiveData<GuestModel> = guestModel
+
+    private val _saveGuest = MutableLiveData<String>()
+    val saveGuest: LiveData<String> = _saveGuest
     fun save(guest: GuestModel) {
-        if (guest.id == 0){
-            repository.save(guest)
-        } else{
-            repository.update(guest)
+        if (guest.id == 0) {
+            if (repository.save(guest)) {
+                _saveGuest.value = "Salvo com sucesso!"
+            } else {
+                _saveGuest.value = "Falha ao salvar!"
+            }
+        } else {
+            if (repository.update(guest)) {
+                _saveGuest.value = "Atualizado com sucesso!"
+            } else {
+                _saveGuest.value = "Falha ao atualizar!"
+            }
+
         }
     }
 
-    fun get(id:Int) {
+    fun get(id: Int) {
         guestModel.value = repository.findById(id)
     }
 

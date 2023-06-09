@@ -35,11 +35,11 @@ class AllGuestsFragment : Fragment() {
         binding.recyclerAllGuests.layoutManager = LinearLayoutManager(context)
         binding.recyclerAllGuests.adapter = adapter
 
-        val listerner = object: IGuestListener {
+        val listerner = object : IGuestListener {
             override fun onClick(id: Int) {
 
                 val intent = Intent(context, GuestFormActivity::class.java)
-                val bundle  = Bundle()
+                val bundle = Bundle()
                 bundle.putInt(DataBaseConstants.GUEST.ID, id)
 
                 intent.putExtras(bundle)

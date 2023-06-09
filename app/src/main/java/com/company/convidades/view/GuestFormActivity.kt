@@ -1,13 +1,15 @@
 package com.company.convidades.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.company.convidades.R
 import com.company.convidades.constants.DataBaseConstants
 import com.company.convidades.databinding.ActivityGuestFormBinding
 import com.company.convidades.model.GuestModel
 import com.company.convidades.viewmodel.GuestFormViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class GuestFormActivity : AppCompatActivity() {
 
@@ -33,7 +35,6 @@ class GuestFormActivity : AppCompatActivity() {
                 val entity = GuestModel(guestId, name, present)
 
                 viewModel.save(entity)
-                finish()
             }
         }
 
@@ -49,6 +50,13 @@ class GuestFormActivity : AppCompatActivity() {
                 binding.radioPresent.isChecked
             } else{
                 binding.radioAbsent.isChecked
+            }
+        }
+
+        viewModel.saveGuest.observe(this){
+            if (it != ""){
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                finish()
             }
         }
     }

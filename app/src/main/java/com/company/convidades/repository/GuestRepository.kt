@@ -79,8 +79,6 @@ class GuestRepository private constructor(context: Context) {
         }
     }
 
-
-
     fun findAll():List<GuestModel> {
 
         val guests = mutableListOf<GuestModel>()

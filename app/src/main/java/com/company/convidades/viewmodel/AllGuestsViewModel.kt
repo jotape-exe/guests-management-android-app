@@ -14,7 +14,7 @@ class AllGuestsViewModel(application: Application) : AndroidViewModel(applicatio
     private val allGuests = MutableLiveData<List<GuestModel>>()
     val guests: LiveData<List<GuestModel>> = allGuests
 
-    fun finALl(){
+    fun finALl() {
         allGuests.value = guestRepository.findAll()
     }
 
