@@ -12,28 +12,27 @@ import com.company.convidades.constants.DataBaseConstants
 import com.company.convidades.databinding.FragmentAllGuestsBinding
 import com.company.convidades.view.adapter.GuestsAdapter
 import com.company.convidades.view.listener.IGuestListener
-import com.company.convidades.viewmodel.AllGuestsViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.company.convidades.viewmodel.GuestsViewModel
 
 class AllGuestsFragment : Fragment() {
 
     private var _binding: FragmentAllGuestsBinding? = null
     private val binding get() = _binding!!
     private val adapter = GuestsAdapter()
-    private lateinit var allGuestsViewModel: AllGuestsViewModel
+    private lateinit var guestsViewModel: GuestsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         bundle: Bundle?
     ): View {
-        allGuestsViewModel =
-            ViewModelProvider(this).get(AllGuestsViewModel::class.java)
+        guestsViewModel =
+            ViewModelProvider(this).get(GuestsViewModel::class.java)
 
         _binding = FragmentAllGuestsBinding.inflate(inflater, container, false)
 
-        binding.recyclerAllGuests.layoutManager = LinearLayoutManager(context)
-        binding.recyclerAllGuests.adapter = adapter
+        binding.recyclerGuests.layoutManager = LinearLayoutManager(context)
+        binding.recyclerGuests.adapter = adapter
 
         val listerner = object : IGuestListener {
             override fun onClick(id: Int) {
@@ -48,8 +47,8 @@ class AllGuestsFragment : Fragment() {
             }
 
             override fun onDelete(id: Int) {
-                allGuestsViewModel.delete(id)
-                allGuestsViewModel.finALl()
+                guestsViewModel.delete(id)
+                guestsViewModel.finALl()
             }
 
         }
@@ -64,13 +63,11 @@ class AllGuestsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        allGuestsViewModel.finALl()
-
-
+        guestsViewModel.finALl()
     }
 
     private fun observe() {
-        allGuestsViewModel.guests.observe(viewLifecycleOwner) {
+        guestsViewModel.guests.observe(viewLifecycleOwner) {
             adapter.updateGuests(it)
         }
     }
