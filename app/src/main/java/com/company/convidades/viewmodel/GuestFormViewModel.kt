@@ -9,7 +9,7 @@ import com.company.convidades.repository.GuestRepository
 
 class GuestFormViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var repository = GuestRepository.getInstance(application)
+    private var repository = GuestRepository(application)
     private val guestModel = MutableLiveData<GuestModel>()
     val guest: LiveData<GuestModel> = guestModel
 

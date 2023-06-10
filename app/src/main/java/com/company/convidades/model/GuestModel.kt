@@ -4,12 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Guest")
+@Entity(tableName = "guest")
 class GuestModel {
 
     @ColumnInfo
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    var id: Int = 0
 
     @ColumnInfo(name = "name")
     var name: String = ""

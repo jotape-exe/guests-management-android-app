@@ -9,7 +9,6 @@ import com.company.convidades.constants.DataBaseConstants
 import com.company.convidades.databinding.ActivityGuestFormBinding
 import com.company.convidades.model.GuestModel
 import com.company.convidades.viewmodel.GuestFormViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class GuestFormActivity : AppCompatActivity() {
 
@@ -30,9 +29,13 @@ class GuestFormActivity : AppCompatActivity() {
         binding.buttonSave.setOnClickListener {
             if (it.id == R.id.button_save){
                 val name = binding.editName.text.toString()
-                val present = binding.radioPresent.isChecked
+                val presence = binding.radioPresent.isChecked
 
-                val entity = GuestModel(guestId, name, present)
+                val entity = GuestModel().apply {
+                    this.id = guestId
+                    this.name = name
+                    this.presence = presence
+                }
 
                 viewModel.save(entity)
             }
@@ -47,9 +50,9 @@ class GuestFormActivity : AppCompatActivity() {
         viewModel.guest.observe(this) {
             binding.editName.setText(it.name)
             if (it.presence){
-                binding.radioPresent.isChecked
+                binding.radioPresent.isChecked = true
             } else{
-                binding.radioAbsent.isChecked
+                binding.radioAbsent.isChecked = true
             }
         }
 
