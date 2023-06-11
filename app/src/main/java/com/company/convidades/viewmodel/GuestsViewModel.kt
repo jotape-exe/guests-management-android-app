@@ -17,8 +17,8 @@ class GuestsViewModel(application: Application) : AndroidViewModel(application) 
         allGuests.value = guestRepository.findAll()
     }
 
-    fun getByPresence(presece: Int){
-        allGuests.value = guestRepository.findAllByPresence(presece)
+    fun getByPresence(presence: Int){
+        allGuests.value = guestRepository.findAllByPresence(presence)
     }
 
     fun delete(id: Int) {
