@@ -7,6 +7,18 @@
     android:padding="30dp"
     tools:context=".view.GuestFormActivity">
 
+    <ImageView
+        android:id="@+id/image_add"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="@+id/text_new_guest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toEndOf="@+id/text_new_guest"
+        app:layout_constraintTop_toTopOf="@+id/text_new_guest"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/text_new_guest"
         android:layout_width="wrap_content"
@@ -80,7 +92,7 @@
         android:layout_height="wrap_content"
         android:text="SAVE"
         android:width="120dp"
-        android:backgroundTint="@color/green_93"
+        android:backgroundTint="@color/teal_800"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
